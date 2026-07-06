@@ -3,3 +3,4 @@ hmmlearn
 matplotlib
 statsmodels
 numpy
+xgboost
