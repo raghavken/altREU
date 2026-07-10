@@ -4,3 +4,4 @@ matplotlib
 statsmodels
 numpy
 xgboost
+scikit-learn
