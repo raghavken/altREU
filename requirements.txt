@@ -5,3 +5,4 @@ statsmodels
 numpy
 xgboost
 scikit-learn
+seaborn
