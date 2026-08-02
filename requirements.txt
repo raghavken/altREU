@@ -1,8 +1,10 @@
 pandas
 hmmlearn
+gaussian-hsmm==0.1.0
 matplotlib
 statsmodels
 numpy
+scipy
 xgboost
 scikit-learn
 seaborn
