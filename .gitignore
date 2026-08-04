@@ -1,3 +1,5 @@
+notebooks/archive/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -77,12 +79,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-notebooks/final.ipynb
-notebooks/final2.ipynb
-notebooks/spillover.ipynb
-notebooks/hsmm2.ipynb
 
-# Generated research factors (rebuild with notebooks/spillover.ipynb)
+
 data/generated/
 
 # IPython
@@ -223,3 +221,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+trash/
