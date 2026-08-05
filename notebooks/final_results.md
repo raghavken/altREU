@@ -226,3 +226,50 @@ Factors
 
 
 Caveats to carry into the paper: the holdout was examined during development (all p values conditional on that), the forward test is small but untouched, 2007-2009 and 2020 stress windows are quasi out-of-sample because design choices were made on overlapping data.
+
+## Expanded validation (per-horizon windows, maximum use of maturities_full)
+
+Supersedes the 19-window forward test above: per-horizon origin lists (39 / 39 / 34 windows at 1 / 5 / 20 days) with targets looked up in the full yield calendar, using the new data through its final day (2026-08-03). The widened sample includes the sharp July 2026 upward reversal in yields, which the 19-window subset largely predates, and it changes the validation verdict: the ensemble matches the random walk at 1 day but underperforms at 20 days, with negative trading capture. This is the honest validation result to report.
+
+```
+h= 1 :  39  validation windows, origins  2026-05-15  to  2026-07-13 , last target  2026-07-14
+h= 5 :  39  validation windows, origins  2026-05-15  to  2026-07-13 , last target  2026-07-20
+h= 20 :  34  validation windows, origins  2026-05-15  to  2026-07-06 , last target  2026-08-03
+finished horizon  1
+finished horizon  5
+finished horizon  20
+saved validation_forecasts.csv with  3696  rows
+==============================
+
+==============================
+EXPANDED VALIDATION ERRORS (39 / 39 / 34 windows, frozen pipeline)
+==============================
+Model:  Random Walk
+Horizon: 1 day, rmse: 4.160251471689219, MAE: 3.041958041958043, Directional Accuracy: nan %, base rate: 52.732240437158474 % 
+Horizon: 5 day, rmse: 7.509279418777633, MAE: 5.951048951048949, Directional Accuracy: nan %, base rate: 53.46534653465347 % 
+Horizon: 20 day, rmse: 13.772502248386752, MAE: 11.1524064171123, Directional Accuracy: nan %, base rate: 78.41530054644808 % 
+
+Model:  VARX
+Horizon: 1 day, rmse: 4.1576619600306, MAE: 3.072195314573694, Directional Accuracy: 46.72131147540984 %, base rate: 52.732240437158474 % 
+Horizon: 5 day, rmse: 7.635597756385477, MAE: 6.018453307199103, Directional Accuracy: 53.46534653465347 %, base rate: 53.46534653465347 % 
+Horizon: 20 day, rmse: 15.186003174404783, MAE: 12.277737621313193, Directional Accuracy: 43.169398907103826 %, base rate: 78.41530054644808 % 
+
+Model:  EWA Ensemble
+Horizon: 1 day, rmse: 4.155491124130256, MAE: 3.058241545986598, Directional Accuracy: 46.72131147540984 %, base rate: 52.732240437158474 % 
+Horizon: 5 day, rmse: 7.5569193443204234, MAE: 5.963386263807167, Directional Accuracy: 53.46534653465347 %, base rate: 53.46534653465347 % 
+Horizon: 20 day, rmse: 14.623506907346416, MAE: 11.804678984210726, Directional Accuracy: 43.169398907103826 %, base rate: 78.41530054644808 % 
+
+DM tests, EWA vs Random Walk (small samples, low power)
+h= 1  DM:  -0.28  p:  0.7785
+h= 5  DM:  0.32  p:  0.749
+h= 20  DM:  0.53  p:  0.6023
+
+weighted directional accuracy, EWA Ensemble (1bp threshold, 0.5bp cost)
+Horizon:  1  day, no trades cleared the threshold
+Horizon:  5  day, weighted DA:  0.4459  capture:  -0.1082  trades:  73  net pnl bp:  -56.5
+Horizon:  20  day, weighted DA:  0.3298  capture:  -0.3405  trades:  306  net pnl bp:  -1159.0
+```
+
+Additional figures
+- figures/validation_predicted_vs_actual_2Y.png and _10Y.png (full validation span)
+- figures/validation_predicted_vs_actual_moves.png (per-horizon scatter, correlations 0.06 / 0.02 / 0.12)
